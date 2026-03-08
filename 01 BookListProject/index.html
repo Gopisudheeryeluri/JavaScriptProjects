@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookList</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <h1 class="bg-pink-200 p-4 text-center m-3">welcome to BookList Project</h1>
+    <form action="" class="w-[40%] m-auto hidden">
+        <div class="mt-2">
+            <label for="" class="">Book Title</label>
+            <input type="text" placeholder="Enter Book Title" id="book-title" class="w-full p-2 border-1 border-indigo-300 rounded-2xl my-2 focus:outline-blue-500">
+        </div>
+        <div>
+            <label for="" class="" style="border: hidden;">Author</label>
+            <input type="text" placeholder="Enter Author" id="book-author" class="w-full p-2 border-1 border-indigo-300 rounded-2xl my-2 focus:outline-blue-500">
+        </div>
+        <div>
+            <label for="" class="w-full block">Status</label>
+            <select id="category" name="category" class="border-1 rounded-2xl outline-none w-30 my-2">
+                <option value="select">Select</option>
+                <option value="Read">Read</option>
+                <option value="Unread">Unread</option>
+            </select>
+        </div>
+        <div class="form-btns flex gap-10 mt-3">
+            <button id="save" class="border w-20 bg-blue-800 rounded-2xl text-white p-2">Save</button>
+            <button id="cancel" class="border w-20  rounded-2xl text-black p-2">Cancel</button>
+        </div>
+    </form>
+
+    <div class="container border w-[600px] p-2 mx-auto relative">
+        <div class="relative left-[80%]">
+            <button class="addBtn w-20 p-1 text-blue-400">+ADD</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
