@@ -6,7 +6,8 @@ const bookTitle = document.querySelector('#book-title')
 const bookAuthor = document.querySelector('#book-author')
 const bookMode = document.querySelector('#category')
 const save = document.querySelector('#save');
-const cancel = document.querySelector('#cancel')
+const cancel = document.querySelector('#cancel');
+
 
 window.addEventListener('DOMContentLoaded', ()=>{
     form.classList.remove('hidden');
@@ -16,6 +17,9 @@ window.addEventListener('DOMContentLoaded', ()=>{
 add.addEventListener('click', (e)=>{
     form.classList.remove('hidden');
     container.classList.add('hidden');
+    bookTitle.value = '';
+    bookAuthor.value = '';
+    bookMode.value = 'select';
 })
 
 formBtns.addEventListener('click',(e)=>{
@@ -61,13 +65,43 @@ save.addEventListener('click', ()=>{
 
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit';
-    editBtn.className = "bg-orange-400 rounded-xl w-20 p-1 text-white"
+    editBtn.className = "editBtn bg-orange-400 rounded-xl w-20 p-1 text-white"
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
-    deleteBtn.className = "bg-orange-400 rounded-xl w-20 p-1 text-white";
+    deleteBtn.className = "deleteBtn bg-orange-400 rounded-xl w-20 p-1 text-white";
 
     bookDetailsBtns.append(editBtn, deleteBtn);
 
     card.append(bookDetailsContainer, hr, bookDetailsBtns);
     container.appendChild(card);
+})
+
+var targetCard;
+container.addEventListener('click',(e)=>{
+    console.log("cardclck", e);
+    const card = e.target.parentElement.parentElement;
+    targetCard = card;
+    const bookDetails = e.target.parentElement.previousElementSibling.previousElementSibling;
+    const bookDetailsChild = bookDetails.children[0];
+    const bookDetailsChildSibling = bookDetailsChild.nextElementSibling;
+
+console.log(card);
+console.log(bookDetails)
+console.log(bookDetailsChild)
+console.log(bookDetailsChildSibling)
+    if(e.target.classList.contains('editBtn')){
+        container.removeChild(card);
+        form.classList.remove('hidden');
+        container.classList.add('hidden');
+        bookTitle.value = bookDetailsChild.querySelector('h2').textContent;
+        bookAuthor.value = bookDetailsChild.querySelector('h3').textContent;
+        bookMode.value =  bookDetailsChildSibling.querySelector('span').textContent;
+    }
+    if(e.target.classList.contains('deleteBtn')){
+        container.removeChild(card);
+    }
+})
+
+cancel.addEventListener('click', ()=>{
+    container.appendChild(targetCard);
 })
