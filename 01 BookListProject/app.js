@@ -36,7 +36,7 @@ save.addEventListener('click', ()=>{
     bookDetailsContainer.className = "flex justify-between";
 
     const bookDetails = document.createElement('div');
-    bookDetails.className = "relative left-5 mb-2";
+    bookDetails.className = "card-book-details relative left-5 mb-2";
 
     const h2 = document.createElement('h2');
     h2.textContent = bookTitle.value;
@@ -61,7 +61,7 @@ save.addEventListener('click', ()=>{
     hr.className = "w-[95%] m-auto";
 
     const bookDetailsBtns = document.createElement('div');
-    bookDetailsBtns.className = "mt-2 flex justify-around m-2";
+    bookDetailsBtns.className = "card-btns mt-2 flex justify-around m-2";
 
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit';
@@ -79,23 +79,36 @@ save.addEventListener('click', ()=>{
 var targetCard;
 container.addEventListener('click',(e)=>{
     console.log("cardclck", e);
+
+/*
+oldway.......................
     const card = e.target.parentElement.parentElement;
     targetCard = card;
     const bookDetails = e.target.parentElement.previousElementSibling.previousElementSibling;
     const bookDetailsChild = bookDetails.children[0];
     const bookDetailsChildSibling = bookDetailsChild.nextElementSibling;
+*/
 
-console.log(card);
-console.log(bookDetails)
-console.log(bookDetailsChild)
-console.log(bookDetailsChildSibling)
+    const card = e.target.closest('.card'); //new way to get the closet class of that particular card
+
+    const bookTitleDom = card.querySelector('h2');
+    const bookAuthorDom = card.querySelector('h3');
+    const bookModeDom = card.querySelector('span');
+    targetCard = card;
+
     if(e.target.classList.contains('editBtn')){
-        container.removeChild(card);
+        container.removeChild(card); //first remove the card, then modify the values in form and click on save so it will create a new card
         form.classList.remove('hidden');
         container.classList.add('hidden');
+    /*
+    oldway........................
         bookTitle.value = bookDetailsChild.querySelector('h2').textContent;
         bookAuthor.value = bookDetailsChild.querySelector('h3').textContent;
         bookMode.value =  bookDetailsChildSibling.querySelector('span').textContent;
+    */
+        bookTitle.value = bookTitleDom.textContent;
+        bookAuthor.value = bookAuthorDom.textContent;
+        bookMode.value =  bookModeDom.textContent;
     }
     if(e.target.classList.contains('deleteBtn')){
         container.removeChild(card);
